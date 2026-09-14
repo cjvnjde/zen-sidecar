@@ -29,6 +29,8 @@ Zen Sidecar brings two existing browser surfaces together instead of building a 
 
 Hovering a **tool icon does not reveal the tab toolbox**. Move to the **very left edge** to bring Zen’s compact UI forward; use the rail itself to open tools. Sidebar extensions remain ordinary browser extensions, managed through Zen—not copies embedded in this mod.
 
+The rail trims horizontal padding without shrinking native icons or button backgrounds. Firefox’s compact density remains compact.
+
 > [!IMPORTANT]
 > **This is a privileged JavaScript mod, not an XPI or a CSS-only theme.** Sine loads its code into the browser UI with browser-level privileges, outside the normal extension permission model. Review this repository and trust its author before installing. Zen Sidecar is a custom GitHub installation; it is not represented as listed, reviewed, or approved by the Sine marketplace.
 

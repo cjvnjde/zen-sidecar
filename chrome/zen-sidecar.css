@@ -1,9 +1,16 @@
 /* Zen Sidecar. Keep the native tools rail below Zen's hover toolbox. */
 @-moz-document url("chrome://browser/content/browser.xhtml")
 {
+  :root[zen-sidecar] {
+    /* Trim surplus side padding, preserving native compact spacing and buttons.
+       Resolve the native value here, before overriding it on the rail. */
+    --zen-sidecar-button-padding-inline: min(7px, var(--sidebar-launcher-button-padding-inline));
+  }
+
   :root[zen-sidecar] #sidebar-container {
+    --sidebar-launcher-button-padding-inline: var(--zen-sidecar-button-padding-inline);
     /* A flex-item stacking context, below Zen's fixed toolbox (z-index: 10).
-       Keep native sizing, theme colors, focus styles and normal document flow.
+       Keep native button sizing, theme colors, focus styles and document flow.
        In particular, do not extend the left-edge hover target across the rail. */
     z-index: 0 !important;
   }
