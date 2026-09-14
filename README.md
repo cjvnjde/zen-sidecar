@@ -124,7 +124,10 @@ Verified with **Zen 1.21.15b on Linux Flatpak, Sine 2.3.3, and bootloader 0.1.4*
 ## Use and manage
 
 - **Open a tool:** click its icon in the left rail. Use the native sidebar customization control to choose tools; manage sidebar extensions in Zen’s Add-ons Manager (`about:addons`). Only extensions that provide a sidebar can appear here.
-- **Choose your tools:** the gear opens native tool and extension choices. Sidecar hides the vertical-tabs, side-placement, and launcher-behavior settings because its layout is fixed.
+- **Choose your tools:** the gear opens native tool and extension choices. Checking or unchecking an item changes visibility, not its saved position. Sidecar hides the vertical-tabs, side-placement, and launcher-behavior settings because its layout is fixed.
+- **Reorder tools:** drag a tool or extension icon directly on the rail. Drop above or below another icon at the insertion line. The gear stays at the bottom. With an icon focused, **Alt+Shift+Up/Down** moves it one position without opening it.
+- **Keep your order:** positions are saved across restarts and shared by windows in the same profile. Hidden tools and temporarily unavailable extensions keep their place; newly discovered items are appended.
+- **ChatGPT in the sidebar:** use Zen’s native **AI chatbot** tool and select **ChatGPT** in its provider chooser. If the tool is absent on the tested Zen version, set `browser.ml.chat.enabled` to `true` in `about:config`, then enable **AI chatbot** in the rail’s gear menu. This uses the browser’s existing chatbot panel, not a Sidecar bookmark. Arbitrary website bookmarks opening in the rail are not supported.
 - **Reach your tabs:** move to the very left edge, then into the revealed Zen toolbox. Tool icons are not the tab-reveal target.
 - **Disable:** in **Settings → Sine Mods → Installed Mods**, use Zen Sidecar’s individual toggle, whose tooltip is **Disable mod**. Do not use the global **Disable all mods** toggle unless that is what you want. Use **Enable mod** to turn it back on.
 - **Remove:** choose **Remove mod** on Zen Sidecar and confirm. Keep Sine installed if you use other mods; do not remove Sine’s loader to uninstall Sidecar.
@@ -169,6 +172,15 @@ Restart Zen, finish Sine setup if necessary, and install `cjvnjde/zen-sidecar` t
 ## Publishing updates
 
 For each code release, bump `version` and set `updatedAt` in `theme.json` to the current full UTC timestamp, including the time (for example, `2026-09-14T11:14:24Z`). Sine compares `updatedAt`, not version numbers; date-only values miss multiple releases on the same day.
+
+### 1.1.0
+
+- Drag tool and extension icons to reorder the rail, with insertion feedback.
+- Keep order independent of checkbox toggles, including hidden and temporarily unavailable items.
+- Persist order across restarts and synchronize it between profile windows.
+- Add keyboard reordering with Alt+Shift+Up/Down.
+
+Ordering regression checks: `node --test tests/order.test.mjs`. Runtime verification also covers native mouse dragging, checkbox changes, sidebar extensions, multiple windows, restart persistence, and Sine disable/re-enable on the compatibility setup above.
 
 ## License and acknowledgments
 

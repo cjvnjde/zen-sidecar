@@ -6,6 +6,7 @@
   let originalExpansion;
   let originalPanelLauncherVisibility;
   let preferences;
+  let detachOrder;
   let controller;
   const owner = {};
   const controls = new Map();
@@ -66,6 +67,8 @@
     window.removeEventListener("SidebarShown", onSidebarShown);
     root.removeAttribute("zen-sidecar");
     restoreControls();
+    detachOrder?.();
+    detachOrder = null;
     if (!acquired) {
       return;
     }
@@ -144,6 +147,15 @@
       controller._launcherStateAtOpen = true;
     }
     controller.updateToolbarButton();
+    const ordering = ChromeUtils.importESModule(
+      "chrome://sine/content/zen-sidecar/chrome/zen-sidecar-order.mjs",
+    );
+    detachOrder = await ordering.attach(window);
+    if (!active || window.closed || controller.uninitializing) {
+      detachOrder();
+      detachOrder = null;
+      return;
+    }
     window.addEventListener("SidebarShown", onSidebarShown);
     await constrainLayoutControls();
   }
