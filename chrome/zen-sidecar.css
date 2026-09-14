@@ -1,0 +1,15 @@
+/* Zen Sidecar. Keep the native tools rail below Zen's hover toolbox. */
+@-moz-document url("chrome://browser/content/browser.xhtml")
+{
+  :root[zen-sidecar] #sidebar-container {
+    /* A flex-item stacking context, below Zen's fixed toolbox (z-index: 10).
+       Keep native sizing, theme colors, focus styles and normal document flow.
+       In particular, do not extend the left-edge hover target across the rail. */
+    z-index: 0 !important;
+  }
+
+  /* Web/video fullscreen must not leave a browser-chrome strip on screen. */
+  :root[zen-sidecar][inDOMFullscreen] #sidebar-container {
+    display: none !important;
+  }
+}

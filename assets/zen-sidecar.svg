@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="250" viewBox="0 0 960 250" role="img" aria-labelledby="title description">
+  <title id="title">Zen Sidecar</title>
+  <desc id="description">An original diagram of a narrow tools rail with a second sidebar floating above it. Zen Sidecar: tools within reach, tabs on demand.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#142a32"/>
+      <stop offset="1" stop-color="#101a28"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a7e5d3"/>
+      <stop offset="1" stop-color="#76b9ca"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="250" rx="24" fill="url(#background)"/>
+  <path d="M700 0 960 250M780 0 960 174M620 0 870 250" fill="none" stroke="#263b48" stroke-width="1"/>
+  <g transform="translate(62 39)">
+    <rect x="0" y="0" width="178" height="172" rx="17" fill="#1c3440" stroke="#395460"/>
+    <rect x="12" y="12" width="32" height="148" rx="9" fill="#375461"/>
+    <g fill="none" stroke="#c5e6e7" stroke-width="2">
+      <rect x="22" y="27" width="12" height="12" rx="3"/>
+      <circle cx="28" cy="60" r="6"/>
+      <path d="M23 77h10v14l-5-3-5 3z"/>
+      <circle cx="28" cy="143" r="4"/>
+    </g>
+    <rect x="53" y="30" width="143" height="122" rx="12" fill="#0b1720" opacity=".35"/>
+    <rect x="48" y="22" width="143" height="122" rx="12" fill="url(#panel)"/>
+    <rect x="61" y="36" width="117" height="18" rx="5" fill="#25515a" opacity=".7"/>
+    <g fill="#29525c">
+      <rect x="63" y="68" width="9" height="9" rx="3"/>
+      <rect x="63" y="91" width="9" height="9" rx="3"/>
+      <rect x="63" y="114" width="9" height="9" rx="3"/>
+      <rect x="81" y="70" width="78" height="5" rx="2.5" opacity=".7"/>
+      <rect x="81" y="93" width="62" height="5" rx="2.5" opacity=".7"/>
+      <rect x="81" y="116" width="70" height="5" rx="2.5" opacity=".7"/>
+    </g>
+  </g>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <text x="302" y="82" fill="#9cd9cb" font-size="13" font-weight="600" letter-spacing="3">A SINE MOD FOR ZEN BROWSER</text>
+    <text x="298" y="140" fill="#edf6f5" font-size="53" font-weight="700" letter-spacing="-2">Zen Sidecar</text>
+    <text x="302" y="179" fill="#bbced5" font-size="21">Tools within reach. Tabs on demand.</text>
+  </g>
+</svg>
