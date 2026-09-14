@@ -166,6 +166,10 @@ Restart Zen, finish Sine setup if necessary, and install `cjvnjde/zen-sidecar` t
 
 </details>
 
+## Publishing updates
+
+For each code release, bump `version` and set `updatedAt` in `theme.json` to the current full UTC timestamp, including the time (for example, `2026-09-14T11:14:24Z`). Sine compares `updatedAt`, not version numbers; date-only values miss multiple releases on the same day.
+
 ## License and acknowledgments
 
 Zen Sidecar is available under the **[MIT License](LICENSE)**.
