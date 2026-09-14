@@ -13,12 +13,7 @@
 
   function restoreControls() {
     for (const [control, previous] of controls) {
-      control.disabled = previous.disabled;
-      if (previous.title === null) {
-        control.removeAttribute("title");
-      } else {
-        control.setAttribute("title", previous.title);
-      }
+      control.hidden = previous;
     }
     controls.clear();
   }
@@ -37,19 +32,15 @@
         controller.currentID !== "viewCustomizeSidebar") {
       return;
     }
-    // Tool and extension choices remain native. Only the fixed layout controls
-    // are disabled; Firefox's customizer does not honor locked prefs itself.
+    // Keep native tool and extension choices, without exposing layout settings
+    // that cannot apply to Sidecar's fixed, left-hand tools rail.
     for (const control of customize.shadowRoot.querySelectorAll(
-      "#vertical-tabs, #position, #open-tools-from-sidebar",
+      "moz-fieldset:has(#vertical-tabs, #position, #open-tools-from-sidebar)",
     )) {
       if (!controls.has(control)) {
-        controls.set(control, {
-          disabled: control.disabled,
-          title: control.getAttribute("title"),
-        });
+        controls.set(control, control.hidden);
       }
-      control.disabled = true;
-      control.title = "Layout controlled by Zen Sidecar";
+      control.hidden = true;
     }
   }
 
@@ -64,11 +55,14 @@
     console.error("Zen Sidecar:", error);
   }
 
-  async function detach() {
+  function detach() {
+    // An already-unloaded window must return synchronously, without handing
+    // Sine a new Promise tied to a closed window.
     if (!active) {
       return;
     }
     active = false;
+    window.removeEventListener("unload", detach);
     window.removeEventListener("SidebarShown", onSidebarShown);
     root.removeAttribute("zen-sidecar");
     restoreControls();
@@ -76,23 +70,29 @@
       return;
     }
     acquired = false;
-    // Release synchronously, including on window close. Another live window's
-    // lease keeps the process preferences in place.
-    await preferences.release(owner);
-    if (!window.closed && !controller.uninitializing) {
-      if (originalPanelLauncherVisibility === undefined) {
-        delete controller._launcherStateAtOpen;
-      } else {
-        controller._launcherStateAtOpen = originalPanelLauncherVisibility;
-      }
-      controller._state.updateVisibility(originalVisibility, originalExpansion);
-      controller.updateToolbarButton();
+    // The shared module releases preferences synchronously and returns a
+    // process-owned Promise, safe even when this window is closing.
+    const released = preferences.release(owner);
+    if (window.closed || controller.uninitializing) {
+      return released;
     }
+    return released.then(() => {
+      if (!window.closed && !controller.uninitializing) {
+        if (originalPanelLauncherVisibility === undefined) {
+          delete controller._launcherStateAtOpen;
+        } else {
+          controller._launcherStateAtOpen = originalPanelLauncherVisibility;
+        }
+        controller._state.updateVisibility(originalVisibility, originalExpansion);
+        controller.updateToolbarButton();
+      }
+    });
   }
 
   // Register here, not inside the helper: Sine identifies this .uc.js using the
   // caller filename. It awaits this callback on disable, remove, and reload.
   window.addUnloadListener(detach);
+  window.addEventListener("unload", detach, { once: true });
 
   async function attach() {
     if (Services.appinfo.name !== "Zen" || Services.appinfo.inSafeMode) {
@@ -150,6 +150,10 @@
 
   attach().catch(async error => {
     report(error);
-    await detach().catch(report);
+    try {
+      await detach();
+    } catch (cleanupError) {
+      report(cleanupError);
+    }
   });
 })();

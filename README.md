@@ -45,7 +45,11 @@ Actual captures from an isolated Zen profile, not browser mockups. The header gr
 ![Zen’s compact toolbox revealed over the left tools rail](screenshots/hover.png)
 
 <details>
-<summary><strong>Sidebar extension and Sine installation</strong></summary>
+<summary><strong>Tool choices, sidebar extensions, and Sine installation</strong></summary>
+
+### Just the settings you need
+
+![Native sidebar customization showing Firefox tools and extension choices, without fixed-layout settings](screenshots/customize.png)
 
 ### A real sidebar extension
 
@@ -118,6 +122,7 @@ Verified with **Zen 1.21.15b on Linux Flatpak, Sine 2.3.3, and bootloader 0.1.4*
 ## Use and manage
 
 - **Open a tool:** click its icon in the left rail. Use the native sidebar customization control to choose tools; manage sidebar extensions in Zen’s Add-ons Manager (`about:addons`). Only extensions that provide a sidebar can appear here.
+- **Choose your tools:** the gear opens native tool and extension choices. Sidecar hides the vertical-tabs, side-placement, and launcher-behavior settings because its layout is fixed.
 - **Reach your tabs:** move to the very left edge, then into the revealed Zen toolbox. Tool icons are not the tab-reveal target.
 - **Disable:** in **Settings → Sine Mods → Installed Mods**, use Zen Sidecar’s individual toggle, whose tooltip is **Disable mod**. Do not use the global **Disable all mods** toggle unless that is what you want. Use **Enable mod** to turn it back on.
 - **Remove:** choose **Remove mod** on Zen Sidecar and confirm. Keep Sine installed if you use other mods; do not remove Sine’s loader to uninstall Sidecar.

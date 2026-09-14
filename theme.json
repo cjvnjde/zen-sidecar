@@ -3,7 +3,7 @@
   "name": "Zen Sidecar",
   "description": "Firefox's tools sidebar beneath Zen's compact UI: bookmarks, history, and extension sidebars.",
   "author": "cjvnjde",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "createdAt": "2026-09-14",
   "updatedAt": "2026-09-14",
   "homepage": "https://github.com/cjvnjde/zen-sidecar",

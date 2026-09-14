@@ -8,6 +8,13 @@
     z-index: 0 !important;
   }
 
+  :root[zen-sidecar] #sidebar-container > sidebar-main {
+    /* Center against the visible gutter, including Zen's gap before the page.
+       Relative positioning keeps the rail width and page placement unchanged. */
+    position: relative !important;
+    inset-inline-start: calc(var(--zen-element-separation) / 2) !important;
+  }
+
   /* Web/video fullscreen must not leave a browser-chrome strip on screen. */
   :root[zen-sidecar][inDOMFullscreen] #sidebar-container {
     display: none !important;
